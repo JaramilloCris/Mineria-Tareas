@@ -94,25 +94,30 @@ data_tf <- read.csv("http://dcc.uchile.cl/~hsarmien/mineria/datasets/actas.txt",
 1. ¿Cuáles son las dimensiones del dataset (filas, columnas)? Adjunte código o indique cómo determinó la cantidad de datos total. 
 
 ```{r}
-# RESPUESTA
+nrow(data_tf)
+ncol(data_tf)
 ```
 
 2. ¿Qué describe cada línea del dataset? (ejemplifique tomando la fila 85)
 
 ```{r}
-# RESPUESTA
+data_tf[,85]
 ```
 
 3. ¿Existen localidades repetidas en el dataset? Adjunte el código o indique cómo llegó a esa conclusión. 
 
 ```{r}
-# RESPUESTA
+data <- data_tf %>%
+  group_by(localidad)
+
+nrow(data_tf)
+nrow(data)
 ```
 
 4. Liste los nombres de las columnas del dataset `data_tf`. Adjunte código en R y *recuerde* usar `head` si el resultado es muy largo.
 
 ```{r}
-# RESPUESTA
+head(names(data_tf))
 ```
 
 
@@ -121,13 +126,14 @@ data_tf <- read.csv("http://dcc.uchile.cl/~hsarmien/mineria/datasets/actas.txt",
 1. Liste todas las localidades donde *no* se discutió el concepto `a_la_salud`. 
 
 ```{r}
-# RESPUESTA
+data_tf[data_tf$a_la_salud==0, "localidad"]
 ```
 
 2. Liste las 10 localidades que más mencionaron el concepto `justicia`. 
 
 ```{r}
-# RESPUESTA
+d <- data_tf[order(data_tf$justicia, decreasing = TRUE), "localidad"]
+d[0:10]
 ```
 
 
@@ -135,7 +141,11 @@ data_tf <- read.csv("http://dcc.uchile.cl/~hsarmien/mineria/datasets/actas.txt",
 
 
 ```{r}
-# RESPUESTA
+d <- colSums(data_tf[,-1])
+cantidad <- d[order(d, decreasing = FALSE)]
+d <- data.frame(cantidad)
+nombres <- names(cantidad)
+nombres[0:10]
 ```
 
 
@@ -143,7 +153,11 @@ data_tf <- read.csv("http://dcc.uchile.cl/~hsarmien/mineria/datasets/actas.txt",
 
 
 ```{r}
-# RESPUESTA
+d <- rowSums(data_tf[,-1])
+d <- data.frame(localidad=data_tf[,"localidad"], cantidad=d)
+d <- d[order(d$cantidad, decreasing = TRUE), "localidad"]
+d[0:10]
+
 ```
 
 5. Ejecute el siguiente código que permitirá agregar una nueva columna a nuestro dataframe que solo tendrá el nombre de la región.
