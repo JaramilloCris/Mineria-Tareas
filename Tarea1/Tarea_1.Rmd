@@ -104,7 +104,12 @@ ncol(data_tf)
 2. ¿Qué describe cada línea del dataset? (ejemplifique tomando la fila 85)
 
 ```{r}
-data_tf[,85]
+data_tf[85,]
+# Cada fila del dataset representa la participación de localidades en distintos conceptos. La primera columna
+# de la fila se presenta el nombre del lugar donde se tomaron los datos y las demas columnas son numeros enteros que 
+# entregan el grado de participación de esa localidad en distintos puntos (huelga, educación, etc).
+
+# Por ejemplo para el caso de la fila 85, su localidad es Coquimbo/Elqui/Andacollo, donde hubo 0 mención a huelga, 1 mención de eduación, etc
 ```
 
 3. ¿Existen localidades repetidas en el dataset? Adjunte el código o indique cómo llegó a esa conclusión. 
