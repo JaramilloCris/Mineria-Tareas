@@ -96,7 +96,10 @@ data_tf <- read.csv("http://dcc.uchile.cl/~hsarmien/mineria/datasets/actas.txt",
 ```{r}
 nrow(data_tf)
 ncol(data_tf)
+#Filas = 328
+#Columnas = 113
 ```
+
 
 2. ¿Qué describe cada línea del dataset? (ejemplifique tomando la fila 85)
 
@@ -112,6 +115,9 @@ data <- data_tf %>%
 
 nrow(data_tf)
 nrow(data)
+
+#Al crear un dataframe agrupando las localidades y calculando sus filas, se aprecia que son la misma cantidad
+#Que el dataframe sin agrupar, por lo que no existen localidades repetidas
 ```
 
 4. Liste los nombres de las columnas del dataset `data_tf`. Adjunte código en R y *recuerde* usar `head` si el resultado es muy largo.
@@ -180,14 +186,54 @@ Cabe resaltar, que se esperan tres gráficos de barras para las tres diferentes 
 
 ```{r}
 # 10 conceptos más mencionados en Atacama
+atacama_df <- data_tf[data_tf$region == "Atacama",]
+nombres <- names(atacama_df[,-2:-1])
+new_data <- data.frame(concepto = nombres, total = colSums(atacama_df[,-2:-1]))
+new_data <- new_data[order(new_data$total, decreasing = TRUE),]
+new_data <- new_data[0:10,]
+
+library(ggplot2)  # cargamos la librería
+
+ggplot(new_data) +   # asociamos un data frame a ggplot
+  geom_bar(aes(x = concepto, y = total), stat="identity") +
+  coord_flip() +
+  ggtitle("10 conceptos más mencionados en Atacama") +
+  xlab("Concepto") + ylab("Frecuencia (cantidad)") 
+
 ```
 
 ```{r}
 # 10 conceptos más mencionados en Coquimbo
+coquimbo_df <- data_tf[data_tf$region == "Coquimbo",]
+nombres <- names(coquimbo_df[,-2:-1])
+new_data <- data.frame(concepto = nombres, total = colSums(coquimbo_df[,-2:-1]))
+new_data <- new_data[order(new_data$total, decreasing = TRUE),]
+new_data <- new_data[0:10,]
+
+library(ggplot2)  # cargamos la librería
+
+ggplot(new_data) +   # asociamos un data frame a ggplot
+  geom_bar(aes(x = concepto, y = total), stat="identity") +
+  coord_flip() +
+  ggtitle("10 conceptos más mencionados en Coquimbo") +
+  xlab("Concepto") + ylab("Frecuencia (cantidad)") 
 ```
 
 ```{r}
 # 10 conceptos más mencionados en Metropolitana de Santiago
+santiago_df <- data_tf[data_tf$region == "Metropolitana de Santiago",]
+nombres <- names(santiago_df[,-2:-1])
+new_data <- data.frame(concepto = nombres, total = colSums(santiago_df[,-2:-1]))
+new_data <- new_data[order(new_data$total, decreasing = TRUE),]
+new_data <- new_data[0:10,]
+
+library(ggplot2)  # cargamos la librería
+
+ggplot(new_data) +   # asociamos un data frame a ggplot
+  geom_bar(aes(x = concepto, y = total), stat="identity") +
+  coord_flip() +
+  ggtitle("10 conceptos más mencionados en Santiago") +
+  xlab("Concepto") + ylab("Frecuencia (cantidad)") 
 ```
 
 6. De la pregunta anterior, ¿considera que es razonable usar el conteo de frecuencias para determinar las regiones que tuvieron mayor participación en el proceso? ¿Por qué? Sugiera y solamente comente una forma distinta de hacerlo.
