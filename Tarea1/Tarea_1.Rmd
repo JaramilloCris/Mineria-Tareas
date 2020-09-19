@@ -34,10 +34,29 @@ La primera parte de esta actividad son preguntas teóricas que avanzaron en las 
 
 **Respuesta:**
 
+El objetivo de la minería de datos es generar conocimiento o patrones desconocidos a partir de grandes volúmenes de datos.
+A partir de estos datos se extrae información y se transforma en una estructura comprensible de la cual se extraigan conocimientos. Por otro lado el machine learning crea sistemas que puedan aprender automáticamente, generan predicciones.
+
+Un asistente de texto automatico en una pagina web:
+
+Machine Learning: A partir de los mensajes que le llegan del usuario, el programa predice que debe responder y de que forma.
+
+Minería: A partir de muchas muestras de datos (conversaciones del este programa) podemos ver si esta funcionando correctamente o no y a que factores se debe.
+
 
 *2. Describa y compare los siguientes métodos usados en Minería de datos: clasificación vs. clustering.*
 
 **Respuesta:**
+
+Clasificación:
+
+Tiene un set de entrenamiento de atributos enfocados en clases. Se modelan en atributo clase. Se enfoca principalmente en clasificar datos nuevos asignándoles la clase más correcta, es decir, se tiene un set de datos que poseen atributos y se agrupan por clases (tienen atributos similares), luego llegan nuevos datos a los que se les debe asignar una clase de estas que se encuentran en el dataset.
+
+Clustering:
+
+Se tiene datos con un set de atributos y cierta semejanza entre si, su objetivo es encontrar conjuntos similares entre sí y también conjuntos que no tengan muchas similitudes.
+
+En clasificación llegan datos sin una clase y se le asigna dependiendo sus atributos, mientras que clustering busca buscar semejanzas o diferencias entre grupos de datos.
 
 
 *3. ¿Qué desafios existen en Minería de datos?*
