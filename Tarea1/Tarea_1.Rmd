@@ -63,35 +63,76 @@ En clasificación llegan datos sin una clase y se le asigna dependiendo sus atri
 
 **Respuesta:**
 
+Dentro de los desafios actuales que podemos encontrar hoy en dia en Mineria de Datos se encuentran: 
+
+- Escalabilidad: Nuestro modelo sobre los datos funcione tanto a baja escala como a alta.
+
+- Dimensionalidad: Podemos generar un modelo que tengas muchas caracterisiticas pero generar metodos eficiente sobre todas esas caracteristicas y que encuentre patrones reales puede llegar a ser muy costoso. Por otro lado puede que nuestro modelo tenga muy pocas dimensiones y no nos permite predecir o describir correctamente los datos.
+
+- Datos complejos y heterogeneos: Datos sin una estructura definida (no estructurada) o datos que sean muy distintos entre si y que no permiten encontrar un patron o caracterisistica que nos permita describir los datos correctamente.
+
+- Calidad de los datos: Los datos pueden que no esten de la forma que uno quisiera, puede que falten datos, no esten estructurados de la forma correcta, que exista desbalances en los datos generando analisis incorerectos, etc. 
+
+- Distribucion de los datos y propiedad
+
+- Privacidad
+
+- Streaming: Muchos de los datos que se encuentran en la red son flujos de datos, lo que signfica que son grandes volumenes de datos probablemente no estructurados y como consecuencia su costo de adquision sea muy alto.
+
 
 *4. Respecto a los tipos de atributo, ¿cuál es la diferencia entre razón e intervalo?*
 
 **Respuesta:**
+
+En razón tenemos un "cero", en decir, existe un valor minimo (o valor absoluto minimo) de toda la escala, en cambio en los intervalos no tenemos un rango especificado, podemos tener valores tanto negativos como positivos. Por otro lado los datos de tipo razon tienen la operacion de producto y division, operacion que los intervalos no tienen.
 
 
 *5. ¿Qué factores que ocasionan errores en el análisis de datos deben ser considerados para la limpieza de un set de datos?*
 
 **Respuesta:**
 
+Los factores que ocasionan errores son los siguientes:
+
+- Ruido y outliers
+- Valores faltantes
+- Datos duplicados
+
 
 *6. ¿Qué es el análisis exploratorio de datos o EDA?*
 
 **Respuesta:**
+
+Es un conjunto de tecnicas para comprender de manera rapida la naturaleza de una coleccion de datos o dataset, basada principalmente en dos criterios: Las estadisticas de resumen y la visualizacion de datos.
 
 
 *7. Describa las medidas de tendencia central: media y mediana. Exponga la diferencia entre ambas.*
 
 **Respuesta:**
 
+Media:
+
+Es el promedio de todos los elementos, en otras palabras es la suma de todos los elementos divido en el total.
+
+Mediana:
+
+Teniendo todos los elementos de alguna observacion ordenados de menos a mayor la mediana representa la posicion central que separa la mitad inferior y superior de dichas observaciones, es decir, es el valor que esta justo en medio de todas esas observaciones.
+
+Una de las principales diferencias es que la media es muy sensible a los outliers, en cambio la mediana mucho mas robusta al ruido.
+
 
 *8. ¿Qué es una matriz de correlación y para qué sirve?*
 
 **Respuesta:**
 
+Es una matriz que contiene en sus celdas el coeficiente de correlacion para cada par de variables numericas con un valor entre -1 y 1. Nos sirve para saber como se comportan las variables entre ellas, por ejemplo, si dos variables tienen un valor cercano a 1 significa que si una crece la otra tambien lo hara, en caso contrario si es cercano a -1 tenemos una relacion inversa. Si la correlacion es cercana a 0 tenenos independencia entre ambas variables.
+
 
 *9. Explique cómo se construye un Boxplot y exponga cómo se identifican los valores atípicos u outliers en este tipo de gráfico.*
 
 **Respuesta:**
+
+Los Bloxplot se construyen a partir de los percentiles. Se hace un rectangulo con el pirmer y tercer cuartil dividiendo dicho cuadrdado por la mitad usando la mediana. La altura de este rectangulo es la resta estre los cuantiles anteriores
+$Q_3 - Q_1$ (RIC) que se utiliza para proyectar una recta por ambos extremos de largo: $Q_1 - 1.5 \cdot RIC$ (recta inferior) y $Q_3 + 1.5 \cdot RIC$ (recta superior), si un valor es mas extremo que el largo de alguno de los brazos se consideran atípicos u outliers.
 
 
 ## Práctica 
