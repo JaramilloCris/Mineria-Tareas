@@ -303,8 +303,11 @@ ggplot(new_data) +   # asociamos un data frame a ggplot
 
 6. De la pregunta anterior, ¿considera que es razonable usar el conteo de frecuencias para determinar las regiones que tuvieron mayor participación en el proceso? ¿Por qué? Sugiera y solamente comente una forma distinta de hacerlo.
 
+**respuesta**
+  En la pregunta anterior se calculaban las frecuencias de las 10 conceptos mas mencionados, lo que nos hace perder mucha información sobre los otros conceptos, esto genera que no sea una buena forma de determinar la partición de las comunas en el proceso pues puede pasar que en una comuna de poca participación, sus números se enfoquen en 10 conceptos y nada más, lo que nos daría malas conclusiones. La mejor forma seria sumar todas las frecuencias de los conceptos y de esta manera ordenarlos y ver las regiones mas participativas.
+
 ```{r}
-# RESPUESTA
+
 ```
 
 ## Ejercicios
@@ -325,12 +328,16 @@ Explore el set de datos para responder las siguientes preguntas:
 Este tipo de gráfico nos ayudará a entender como se distribuye los datos por cada tipo de accidentes. Es decir, podremos apreciar que tan dispersos o similares son los datos en todo el dataset. También, puede ser útil para observar valores atípicos u outliers en los datos.
 
 ```{r}
-# RESPUESTA
+df <- tipos[tipos$Muestra == "Regional" & tipos$Anio == "2011",]
+ggplot(df, aes(x = TipoAccidente, y = Cantidad)) + 
+  geom_boxplot()
 ```
 
 2. ¿Qué aprecia con el gráfico anterior? ¿Qué otra forma de explorar los datos podría agregar? ¿Qué información adicional aporta? Adjunte una breve explicación.
 
 **Respuesta:**
+
+En el grafico se puede apreciar que la mayor cantidad de accidentes son por colisión (pues su mediana es mayor) y luego choque, caída y otros posen muy pocas cantidades de accidentes. También es interesante fijarse en que colisión tiene un dato atípico muy alto, que por como esta hecha la tabla, podríamos concluir que corresponde a la región Metropolitana. Por lo general todos los tipos de accidentes tienen valores atípicos, que se puede decir que son de la Región Metropolitana. Otra forma de explorar los datos podría ser con un grafico de barras por años, esto aportaría la información de variación de los accidentes por año (ver si han aumentado, disminuido y de que tipo) 
 
 ### Diamantes
 
