@@ -115,7 +115,7 @@ Es el promedio de todos los elementos, en otras palabras es la suma de todos los
 
 Mediana:
 
-Teniendo todos los elementos de alguna observacion ordenados de menos a mayor la mediana representa la posicion central que separa la mitad inferior y superior de dichas observaciones, es decir, es el valor que esta justo en medio de todas esas observaciones.
+Teniendo todos los elementos de alguna observacion ordenados de menor a mayor la mediana representa la posicion central que separa la mitad inferior y superior de dichas observaciones, es decir, es el valor que esta justo en medio de todas esas observaciones.
 
 Una de las principales diferencias es que la media es muy sensible a los outliers, en cambio la mediana mucho mas robusta al ruido.
 
@@ -348,14 +348,37 @@ Realice una exploración por el set de datos para responder las siguientes pregu
 
 ```{r}
 # RESPUESTA
+summary(diamonds) # resumen para ver diferencias entre pmedia y mediana, observandose que no existen diferencias muy grandes.
+sapply(diamonds, function(x) sum(is.na(x))) # se observa que no existen valores faltantes
+unique(diamonds) # se puede observar que existen filas duplicadas
+```
+
+```{r}
+# 1
+# Al hacer un bloxplot de los atributos fisicos se observa una cantidad considerable de outliers
+boxplot(x = diamonds[c("x","y","z")], ylim=c(0,11), main = "Bloxplot (x,y,z)")
+
+```
+
+```{r}
+# 1
+# En particular en el atributo depth es bastante mayor esta cantidad de outliers y con cierta simentria en torno al boxplot.
+boxplot(x = diamonds[c("depth", "table")],ylim=c(50,75), main = "depth and table")
 ```
 
 2. Considerando la relación entre dos atributos, ¿qué atributos están más correlacionadas con el precio (price) y qué significa esto? ¿cuál es la correlación más alta para table? Adjunte el código necesario para la respuesta.
 
 ```{r}
 # RESPUESTA
+# - precio: Numericamente al hacer una matriz de correlacion se tiene que las dimensiones del diamante (x,y,z) afectan directamente el valor del este (fuertemente correlacionados), esto quiere decir que si un diamante es mas largo, ancho o profundo su precio sera mayor, lo cual es razonable al tratarse de un diamante mas grande.
+# - table: En general se tienen correlaciones mas cercana a 0 que a 1/-1 pero la mas alta seria el atributo "x" que tiene una correlacion positiva debil, por otro lado, el atributo "depth" tiene una correlacion negativa con table un poco mas fuerte que "x".
+cor(diamonds[,5:10])
+
 ```
+
 
 3. Proponga otra forma para explorar los datos. ¿Qué información adicional aporta? Adjunte una breve explicación.
 
 **Respuesta:**
+
+Inspirado en la pregunta anterior, donde se busca correlacion en los atributos fisicos de un diamante y su precio, se puede explorar la distribucion del precio pero no en base a otro dato numerico si no en base a los datos categoricos, por ejemplo que tanto afecta el gusto de las personas en el color de un diamante y su precio o si la claridad o corte del diamante afectan la valorizacion que tenga este. Esta distribucion se puede visualizar en un boxplot donde cada caja representaria un color, corte o claridad.
