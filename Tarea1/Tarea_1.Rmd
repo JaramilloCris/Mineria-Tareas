@@ -355,22 +355,41 @@ Realice una exploración por el set de datos para responder las siguientes pregu
 
 ```{r}
 # RESPUESTA
-summary(diamonds) # resumen para ver diferencias entre pmedia y mediana, observandose que no existen diferencias muy grandes.
+# resumen para ver diferencias entre pmedia y mediana, observandose que no existen diferencias muy grandes.
+summary(diamonds)
+# Por otra parte se puede notar que en en los atributos (x,y,z) existe un valor minimo igual a 0, lo cual es imposible al tratarse de las dimensiones de un objeto.
+```
+```{r}
+# Hacemos un grafico de dispersion con uno de estos atributos y el precio para ver que esta pasando
+ggplot(diamonds, aes(x=x, y=price, color="red")) +
+  geom_point(size=3,shape=4)
+```
+
+```{r}
+# notamos que si existen valores incosistentes, probablemente mal ingresados, debido a que tenemos diamantes sin medidas pero que tienen un precio definido.
+sum(diamonds$x == 0) # 8
+sum(diamonds$y == 0) # 7
+sum(diamonds$z == 0) # 20
+# Al tratarse de que la cantidad de datos inconsistentes es muy baja (menos de 20) en comparacion a la cantidad de datos consistentes (+50.000) una forma de manejar esto seria eliminarlos del analisis. Otra posible forma seria hacer una aproximacion de sus dimensiones en base al precio suponiendo que se haya ingresado correctamente.
+```
+
+```{r}
+# Analisis de valores faltantes
 sapply(diamonds, function(x) sum(is.na(x))) # se observa que no existen valores faltantes
-unique(diamonds) # se puede observar que existen filas duplicadas
 ```
 
 ```{r}
 # 1
 # Al hacer un bloxplot de los atributos fisicos se observa una cantidad considerable de outliers
 boxplot(x = diamonds[c("x","y","z")], ylim=c(0,11), main = "Bloxplot (x,y,z)")
-
 ```
 
 ```{r}
 # 1
 # En particular en el atributo depth es bastante mayor esta cantidad de outliers y con cierta simentria en torno al boxplot.
 boxplot(x = diamonds[c("depth", "table")],ylim=c(50,75), main = "depth and table")
+
+# Estos casos de outliers que son una cantidad mas considerable se podrian manjear a futuro como una clase especial de diamantes que haga que se diferencien del resto.
 ```
 
 2. Considerando la relación entre dos atributos, ¿qué atributos están más correlacionadas con el precio (price) y qué significa esto? ¿cuál es la correlación más alta para table? Adjunte el código necesario para la respuesta.
@@ -380,9 +399,7 @@ boxplot(x = diamonds[c("depth", "table")],ylim=c(50,75), main = "depth and table
 # - precio: Numericamente al hacer una matriz de correlacion se tiene que las dimensiones del diamante (x,y,z) afectan directamente el valor del este (fuertemente correlacionados), esto quiere decir que si un diamante es mas largo, ancho o profundo su precio sera mayor, lo cual es razonable al tratarse de un diamante mas grande.
 # - table: En general se tienen correlaciones mas cercana a 0 que a 1/-1 pero la mas alta seria el atributo "x" que tiene una correlacion positiva debil, por otro lado, el atributo "depth" tiene una correlacion negativa con table un poco mas fuerte que "x".
 cor(diamonds[,5:10])
-
 ```
-
 
 3. Proponga otra forma para explorar los datos. ¿Qué información adicional aporta? Adjunte una breve explicación.
 
