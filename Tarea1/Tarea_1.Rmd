@@ -12,7 +12,7 @@ output:
 ---
 
 # Declaración de compromiso ético
-Nosotros **AGREGUEN SUS NOMBRES**, declaramos que realizamos de manera grupal los pasos de la presente actividad. También declaramos no incurrir en copia, ni compartir nuestras respuestas con otras personas ni con otros grupos. Por lo que, ratificamos que las respuestas son de nuestra propia confección y reflejan nuestro propio conocimiento.
+Nosotros Cristóbal Jaramillo y Vicente Ardiles, declaramos que realizamos de manera grupal los pasos de la presente actividad. También declaramos no incurrir en copia, ni compartir nuestras respuestas con otras personas ni con otros grupos. Por lo que, ratificamos que las respuestas son de nuestra propia confección y reflejan nuestro propio conocimiento.
 
 # Instrucciones
 
@@ -175,6 +175,7 @@ data_tf[85,]
 3. ¿Existen localidades repetidas en el dataset? Adjunte el código o indique cómo llegó a esa conclusión. 
 
 ```{r}
+library(dplyr)
 data <- data_tf %>%
   group_by(localidad)
 
@@ -230,11 +231,12 @@ d <- d[order(d$cantidad, decreasing = TRUE), "localidad"]
 d[0:10]
 
 ```
+La medida de participación se realizo con la suma total de las menciones, es decir quien poseia más menciones, tenia una mayot participacion en el proceso.
 
 5. Ejecute el siguiente código que permitirá agregar una nueva columna a nuestro dataframe que solo tendrá el nombre de la región.
 
 ```{r, message = F, warning=F}
-library(dplyr)
+
 regiones <- strsplit(as.character(data_tf[,1]), '/')
 data_tf$region <- sapply(regiones, "[[", 1)
 data_tf <- data_tf %>% select(localidad, region, everything())
